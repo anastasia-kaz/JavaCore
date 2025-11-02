@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Group {
 
@@ -31,10 +32,21 @@ public class Group {
     }
 
     public void removeStudentsByMark(double avgPoint) {
-        for (Student s : students) {
-            if (s.getAvgPoint() < avgPoint) {
-                students.remove(s);
+        List<Student> toRemove = new ArrayList<>();
+
+        for (Student student : students) {
+            if (student.getAvgPoint() < avgPoint) {
+                toRemove.add(student);
             }
+        }
+
+        students.removeAll(toRemove);
+    }
+
+    public void transferStudentsToGroup(Group newGroup) {
+        if (this.students.size() < 2) {
+            newGroup.getStudents().addAll(this.students);
+            this.students.clear();
         }
     }
 
@@ -48,19 +60,19 @@ public class Group {
 
     public void sortStudentsASC() {
 
-            // Сортировка по возрастанию среднего балла
-            Collections.sort(getStudents(), new Comparator<Student>() {
-                @Override
-                public int compare(Student s1, Student s2) {
-                    return Double.compare(s1.getAvgPoint(), s2.getAvgPoint());
-                }
-            });
-
-
-            for (Student student : getStudents()) {
-                System.out.println(student.getName() + " " + student.getSurname() +
-                        " " + student.getAvgPoint());
+        // Сортировка по возрастанию среднего балла
+        Collections.sort(getStudents(), new Comparator<Student>() {
+            @Override
+            public int compare(Student s1, Student s2) {
+                return Double.compare(s1.getAvgPoint(), s2.getAvgPoint());
             }
+        });
+
+
+        for (Student student : getStudents()) {
+            System.out.println(student.getName() + " " + student.getSurname() +
+                    " " + student.getAvgPoint());
+        }
     }
 
     public void sortStudentsDESC() {

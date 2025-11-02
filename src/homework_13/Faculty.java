@@ -26,16 +26,6 @@ public class Faculty {
         this.groups.add(group);
     }
 
-    public void transferToGroup(Group newGroup) {
-        for (Group gr : groups) {
-            if (gr.getStudents().size() < 2) {
-                for (Student student : gr.getStudents()) {
-                    newGroup.addStudent(student);
-                }
-            }
-        }
-    }
-
     public FacultyStatus getFacultyStatus() {
         return facultyStatus;
     }
