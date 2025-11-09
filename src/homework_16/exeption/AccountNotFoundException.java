@@ -1,0 +1,18 @@
+package homework_16.exeption;
+
+public class AccountNotFoundException extends RuntimeException{
+
+    private String errorCode;
+
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public AccountNotFoundException(String errorCode) {
+        this.errorCode = errorCode;
+    }
+}
